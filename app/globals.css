@@ -26,6 +26,9 @@
   h3 {
     @apply text-xl font-light
   }
+  h4 {
+    @apply text-lg font-medium;
+  }
 
   button {
     @apply cursor-pointer;

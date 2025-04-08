@@ -16,13 +16,7 @@ const Sidebar = ({ children }) => {
 
   return (
     <ExpandedContext.Provider value={expanded}>
-      <aside
-        className={`
-            fixed top-0 left-0
-            h-screen flex flex-col gap-5 bg-gradient-to-b from-white/80 to-primary/10 shadow-md rounded-r-3xl p-3 z-20 backdrop-blur-xs
-            transition-all ease-linear
-            ${expanded ? "w-72" : "w-20"}
-        `}
+      <aside className={`fixed top-0 left-0 h-screen flex flex-col gap-5 bg-gradient-to-b from-white/80 to-primary/10 shadow-md rounded-r-3xl p-3 z-20 backdrop-blur-xs transition-all ease-linear ${expanded ? "w-72" : "w-20"}`}
       >
         <div className="flex flex-col gap-2">
           <div
