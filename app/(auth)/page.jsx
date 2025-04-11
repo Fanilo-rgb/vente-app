@@ -1,11 +1,6 @@
 import Link from "next/link";
 
 export default async function Home() {
-  await new Promise(resolve => {
-    setTimeout(() => {
-      resolve("Intentional delay");
-    }, 1000);
-  });
   return (
     <div className="w-full h-full flex items-center justify-between">
       <div className="grid place-items-center w-1/2 h-full">

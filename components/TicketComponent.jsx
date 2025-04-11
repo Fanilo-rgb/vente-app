@@ -1,46 +1,106 @@
-import React from 'react'
-import {QRCodeSVG} from "qrcode.react";
+"use client"
+import React, { useRef } from "react";
+import { QRCodeSVG } from "qrcode.react";
 
-const TicketComponent = () => {
+const TicketComponent = ({ ticketData }) => {
+  const dollarValue = 3600;
+  const { _id, name, number_card, items, createdAt } = ticketData;
+  const componentRef = useRef();
+
+  const totalAriary = items.reduce(
+    (sum, item) => sum + item.price * dollarValue * item.quantity,
+    0
+  );
+
+  const totalDollar = items.reduce(
+    (sum, item) => sum + item.price * item.quantity,
+    0
+  );
+
   return (
-    <div className="mx-auto flex flex-col gap-4 bg-white p-5 min-w-52 max-w-96 min-h-fit">
-      <div className="flex w-full items-center justify-center">
-        <QRCodeSVG value="text bonjour" size={210} level="L" />
-      </div>
-      <div className="text-xs">
-        <p>07/04/2025</p>
-        <p>Shop Ambodimita</p>
-      </div>
-      <hr className="border-dashed border-1" />
-      <div className="text-xs font-medium">
-        <h4>ANDRIAMBOLOLONA Faniloniaina Princy</h4>
-        <h4 className="tracking-widest">10363889</h4>
-      </div>
-      <hr className="border-1" />
-      <ul className="flex flex-col gap-2">
-        <li>
-          <p className="text-sm mb-2">Kuding</p>
-          <p className="text-xs flex justify-between pl-5">
-            <span>
-              50000 x 2
-            </span>
-            <span> 100 000Ar</span>
+    <div className="flex flex-col items-center">
+      <div
+        ref={componentRef}
+        className="bg-white text-gray-800 p-6 w-[350px] rounded-xl shadow-md flex flex-col gap-4"
+      >
+
+        <div className="w-full">
+          <h1 className="text-5xl text-gradient">MAGLIFE</h1>
+        </div>
+
+        <div className="text-xs ">
+          <p>
+            {new Date(createdAt).toLocaleString("fr-FR", {
+              day: "2-digit",
+              month: "2-digit",
+              year: "numeric",
+              hour: "2-digit",
+              minute: "2-digit",
+              second: "2-digit",
+            })}
           </p>
-        </li>
-      </ul>
-      <div className="relative">
-        <hr className="absolute w-1/3 right-0 border-dashed" />
-        <div className="mt-2 text-sm flex justify-between">
-          <span>Total : </span>
-          <span className="font-medium">100 000 Ar</span>
+          <p>Shop Ambodimita</p>
         </div>
-        <div className="text-sm flex justify-between">
-          <span>BV : </span>
-          <span className="font-semibold">24$</span>
+
+        <hr style={{ borderTop: "1px dashed #cbd5e1" }} />
+
+        <div className="text-sm font-semibold text-center">
+          <h4>{name}</h4>
+          <h4 className="tracking-widest font-bold text-base mt-1">
+            ID : {number_card}
+          </h4>
+        </div>
+
+        <hr />
+
+        <ul className="flex flex-col gap-2 text-sm">
+          {items.map((item) => {
+            const ariary = item.price * dollarValue;
+            return (
+              <li key={item._id}>
+                <p className="font-medium">{item.name}</p>
+                <div className="flex justify-between text-xs pl-3">
+                  <span>
+                    {ariary.toLocaleString("fr-MG")} x {item.quantity}
+                  </span>
+                  <span>
+                    {(ariary * item.quantity).toLocaleString("fr-MG", {
+                      maximumFractionDigits: 0,
+                    })}{" "}
+                    Ar
+                  </span>
+                </div>
+              </li>
+            );
+          })}
+        </ul>
+
+        <hr style={{ borderTop: "1px dashed #cbd5e1" }} />
+
+        <div className="text-sm flex font-medium">
+          <span className="w-full text-right">Total : {totalAriary.toLocaleString("fr-MG")} Ar</span>
+        </div>
+
+        <div className="text-sm flex font-medium">
+          <span>BV : {totalDollar.toFixed(2)} $</span>
+        </div>
+
+        <p
+          className="text-green-700 text-center text-xs mt-2 italic"
+        >
+          Payé et livré
+        </p>
+
+        <div className="flex justify-center">
+          <QRCodeSVG
+            value={`http://localhost:3000/dashboard/tickets/${_id}`}
+            size={150}
+            level="L"
+          />
         </div>
       </div>
-      <p className="text-xs">Payé et livré</p>
     </div>
-  )
-}
-export default TicketComponent
+  );
+};
+
+export default TicketComponent;
