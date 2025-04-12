@@ -9,7 +9,7 @@ const Tickets = async () => {
 
   return (
     <Content title={"Tickets"}>
-      <div className="h-full flex justify-center items-center flex-wrap gap-5 p-8">
+      <div className="h-full flex flex-wrap gap-5 p-8">
         {tickets.map(ticket => {
           const surname = ticket.name.split(" ") ;
           return (

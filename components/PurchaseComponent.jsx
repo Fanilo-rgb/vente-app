@@ -4,24 +4,45 @@ import SearchProductsForm from "@/components/SearchProductsForm";
 import PurchaseList from "@/components/PurchaseList";
 import {DataProvider, useData} from "@/context/DataProvider";
 import ReceiptData from "@/components/ReceiptData";
+import { useRouter } from "next/navigation";
 
 const PurchaseInner = ({ distributors, products }) => {
   const { data } = useData();
+  const router = useRouter();
 
-  const handlePayement = () => {
-    const { holder, products: productList } = data;
+  const handlePayement = async () => {
+    const { holder, products: items } = data;
 
     if (!holder.name || !holder.number_card) {
       alert("Veuillez sélectionner un distributeur.");
       return;
     }
 
-    if (!productList.length) {
+    if (!items.length) {
       alert("Veuillez ajouter au moins un produit.");
       return;
     }
 
-    alert("Paiement prêt !");
+    const name = holder.name;
+    const number_card = holder.number_card;
+
+    try {
+      const res = await fetch("http://localhost:3000/api/tickets", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({name, number_card, items}),
+      });
+
+      if (res.ok) {
+        router.push("/dashboard/tickets");
+      } else {
+        throw new Error("Failed to create ticket");
+      }
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   return (
