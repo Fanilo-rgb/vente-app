@@ -6,10 +6,10 @@ import Tools, {ToolItem} from "@/components/Tools";
 
 const Sales = () => {
   return (
-    <Content title={"Sales"}>
+    <Content title={"Ventes"}>
       <div className="relative h-full w-full flex flex-col gap-5">
         <Nav>
-          <NavItem text={"Today"} />
+          <NavItem text={"Ajourd'hui"} />
         </Nav>
         <div className="mx-5 flex-1 flex gap-5 overflow-auto">
           <div className="flex-1">
@@ -18,9 +18,9 @@ const Sales = () => {
                 <thead>
                   <tr className="bg-primary h-10 uppercase">
                     <th className="font-semibold">N°</th>
-                    <th className="font-semibold text-left">Product</th>
+                    <th className="font-semibold text-left">Produits</th>
                     <th className="font-semibold">QT</th>
-                    <th className="font-semibold">Price</th>
+                    <th className="font-semibold">Prix</th>
                   </tr>
                 </thead>
                 <tbody className="h-fit">
@@ -41,8 +41,8 @@ const Sales = () => {
             </div>
           </div>
           <Tools>
-            <ToolItem icon={<Send/>} text="Send" />
-            <ToolItem icon={<Download/>} text="Download" />
+            <ToolItem icon={<Send size={20}/>} text="Envoyer" />
+            <ToolItem icon={<Download size={20}/>} text="Télécharger" />
           </Tools>
         </div>
         <div className="bg-white mx-5 px-32 py-2 text-right text-2xl">

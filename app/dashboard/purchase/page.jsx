@@ -8,7 +8,7 @@ const Sales = async () => {
   const { products } = await getProducts();
 
   return (
-    <Content title={"Purchase"}>
+    <Content title={"Achat"}>
       <PurchaseComponent distributors={distributors} products={products} />
     </Content>
   )

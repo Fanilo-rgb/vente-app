@@ -2,9 +2,10 @@
 import { useState } from 'react'
 import { Plus } from "lucide-react";
 import { useData } from "@/context/DataProvider";
+import InputSearchResults from "@/components/InputSearchResults";
 
 const SearchProductsForm = ({ products }) => {
-  const { data, setData } = useData();
+  const { setData } = useData();
 
   const [showList, setShowList] = useState(false);
   const [prodName, setProdName] = useState("");
@@ -26,7 +27,7 @@ const SearchProductsForm = ({ products }) => {
         <li
           key={product._id}
           onClick={handleClick}
-          className="h-8 px-5 cursor-pointer flex items-center hover:bg-primary/20 rounded-md transition-all">
+          className="h-8 p-5 cursor-pointer flex items-center hover:bg-primary/20 transition-all">
           <span className="flex-1">{product.name}</span>
           <span>{product.price}</span>
         </li>
@@ -73,6 +74,7 @@ const SearchProductsForm = ({ products }) => {
         <div className="flex items-center gap-2 flex-1 transition-all">
           <input
             onChange={handleChange}
+            onClick={() => setShowList(true)}
             value={prodName}
             onBlur={() => setTimeout(() => setShowList(false), 200)}
             className="text-base flex-1 pl-3 p-2 bg-white rounded-2xl"
@@ -80,13 +82,7 @@ const SearchProductsForm = ({ products }) => {
             placeholder="Nom du produit"
           />
 
-          {showList && (
-            <div className="absolute top-full left-2 right-2 bg-white rounded-2xl shadow-2xl z-50">
-              <ul className="flex flex-col gap-1 py-2">
-                {prodList}
-              </ul>
-            </div>
-          )}
+          <InputSearchResults show={showList} items={prodList} />
 
           <input
             className="bg-white text-base h-10 w-15 pl-2 tracking-widest text-center rounded-2xl"

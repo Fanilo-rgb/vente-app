@@ -1,39 +1,77 @@
-import React from 'react'
+import React from 'react';
 import Content from "@/components/Content";
-import {QRCodeSVG} from "qrcode.react";
-import Link from "next/link";
-import {getTickets} from "@/libs/api";
+import { getTickets } from "@/libs/api";
+import TicketItem from "@/components/TicketItem";
+
+const isSameDay = (date1, date2) => {
+  return date1.toDateString() === date2.toDateString();
+};
+
+const isYesterday = (date) => {
+  const yesterday = new Date();
+  yesterday.setDate(yesterday.getDate() - 1);
+  return isSameDay(date, yesterday);
+};
+
+const isLast7Days = (date) => {
+  const now = new Date();
+  const sevenDaysAgo = new Date();
+  sevenDaysAgo.setDate(now.getDate() - 7);
+  return date > sevenDaysAgo && !isSameDay(date, now) && !isYesterday(date);
+};
 
 const Tickets = async () => {
   const { tickets } = await getTickets();
 
+  const today = [];
+  const yesterday = [];
+  const last7days = [];
+  const older = [];
+
+  tickets.forEach(ticket => {
+    const date = new Date(ticket.createdAt);
+    if (isSameDay(date, new Date())) {
+      today.push(ticket);
+    } else if (isYesterday(date)) {
+      yesterday.push(ticket);
+    } else if (isLast7Days(date)) {
+      last7days.push(ticket);
+    } else {
+      older.push(ticket);
+    }
+  });
+
+  // Fonction pour afficher une section de tickets
+  const renderGroup = (title, list) => {
+    if (list.length === 0) return null;
+
+    list.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
+    return (
+      <div className="mb-10 w-full">
+        <h2 className="text-xl font-semibold mb-4">{title}</h2>
+        <div className="flex flex-wrap gap-5">
+          {list.map(ticket => {
+            const surname = ticket.name.split(" ");
+            return (
+              <TicketItem key={ticket._id} id={ticket._id} name={surname[1]} date={ticket.createdAt} />
+            );
+          })}
+        </div>
+      </div>
+    );
+  };
+
   return (
-    <Content title={"Tickets"}>
-      <div className="h-full flex flex-wrap gap-5 p-8">
-        {tickets.map(ticket => {
-          const surname = ticket.name.split(" ") ;
-          return (
-            <Link key={ticket._id} href={`/dashboard/tickets/${ticket._id}`}>
-              <div className="w-52 h-fit p-5 bg-white rounded-md shadow-sm flex flex-col justify-center items-center gap-5">
-                <QRCodeSVG value={`http://localhost:3000/dashboard/tickets/${ticket._id}`} size={160} level="L"/>
-                <div className="w-full">
-                  <h4>{surname[1]}</h4>
-                  <p className="mt-1 text-xs text-gray-600">
-                    {new Date(ticket.createdAt).toLocaleString("fr-FR", {
-                      day: "2-digit",
-                      month: "long",
-                      year: "numeric",
-                      hour: "2-digit",
-                      minute: "2-digit"
-                    })}
-                  </p>
-                </div>
-              </div>
-            </Link>
-          )
-        })}
+    <Content title="Tickets">
+      <div className="h-full w-full p-8">
+        {renderGroup("Aujourd’hui", today)}
+        {renderGroup("Hier", yesterday)}
+        {renderGroup("7 derniers jours", last7days)}
+        {renderGroup("Autres", older)}
       </div>
     </Content>
-  )
-}
-export default Tickets
+  );
+};
+
+export default Tickets;

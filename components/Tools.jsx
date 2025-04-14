@@ -12,7 +12,7 @@ export default Tools
 
 export const ToolItem = ({ icon, text }) => {
   return (
-    <div className="rounded-2xl bg-black/10 flex flex-col gap-2 items-center justify-center py-2 text-sm">
+    <div className="rounded-2xl bg-black/10 flex flex-col gap-2 items-center justify-center py-2 text-xs">
       {icon}
       {text}
     </div>

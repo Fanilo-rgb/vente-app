@@ -14,3 +14,10 @@ export async function GET() {
   const tickets = await Ticket.find();
   return NextResponse.json({ tickets });
 }
+
+export async function DELETE(req) {
+  const id = req.nextUrl.searchParams.get("id");
+  await connectMongoDB();
+  await Ticket.findByIdAndDelete(id);
+  return NextResponse.json({message: "Ticket deleted",status: 200});
+}

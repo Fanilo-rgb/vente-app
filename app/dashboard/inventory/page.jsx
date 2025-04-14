@@ -3,9 +3,11 @@ import Content from "@/components/Content";
 
 const Inventory = () => {
   return (
-    <Content title={"Inventory"}>
-      Il n'y encore rien ici
-      Attender la mise à jour 😉
+    <Content title={"Inventaire"}>
+      <div className="w-full h-full grid place-items-center text-lg">
+        Il n'y encore rien ici
+        Veuillez attendre la mise à jour 😉
+      </div>
     </Content>
   )
 }

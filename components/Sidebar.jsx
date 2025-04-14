@@ -25,7 +25,7 @@ const Sidebar = ({ children }) => {
             }`}
           >
             <div className={`overflow-hidden ${expanded ? "w-42" : "w-0"} `}>
-              <h4 className="font-semibold">Fanantenana</h4>
+              <h4 className="text-nowrap ml-2 font-semibold">Nom de la personne</h4>
             </div>
 
             <button
@@ -57,7 +57,6 @@ const Sidebar = ({ children }) => {
             </Menu>
           </div>
         </nav>
-
         <ThemeMode />
       </aside>
     </ExpandedContext.Provider>
@@ -107,7 +106,7 @@ export const ThemeMode = () => {
         >
           <SunDim size={20} />
           <span className={`${expanded ? "inline-block" : "hidden"}`}>
-            Light
+            Claire
           </span>
         </div>
         <div
@@ -121,7 +120,7 @@ export const ThemeMode = () => {
         >
           <Moon size={20} />
           <span className={`${expanded ? "inline-block" : "hidden"}`}>
-            Dark
+            Sombre
           </span>
         </div>
       </div>
@@ -135,9 +134,9 @@ export const SidebarItem = ({ icon, text, active }) => {
   return (
     <li
       className={`
-        relative flex items-center
+        flex items-center
         font-medium rounded-full cursor-pointer
-        transition-colors px-4.5 py-4
+        transition-colors px-4.5 py-4 group
         ${
         active
           ? "bg-gradient-to-b from-teal-600 to-teal-400 text-white"
@@ -148,8 +147,11 @@ export const SidebarItem = ({ icon, text, active }) => {
       {icon}
       <span
         className={`
-            overflow-hidden transition-all text-nowrap
-            text-sm ${expanded ? "ml-3 w-52" : "w-0"}
+          overflow-hidden transition-all duration-400 text-nowrap
+          text-sm ${
+          expanded 
+            ? "ml-3 w-52" 
+            : "absolute bg-primary text-gray-600 left-15 py-2 px-5 rounded-lg opacity-0 group-hover:opacity-100 group-hover:left-22 group-"}
         `}
       >
         {text}

@@ -53,7 +53,7 @@ const TicketComponent = ({ ticketData }) => {
           color: "#ffffff", // text-white
         }}
       >
-        Télécharger PDF
+        Imprimer
       </button>
 
       <div
