@@ -1,27 +1,26 @@
-import React from 'react'
+"use client"
 
-const Table = ({ products }) => {
+const Table = ({ data }) => {
   const dollarValue = 3600;
 
-  let total = 0;
-
-  const items = products.map((product, index) => {
-    const prixTotal = (product.price * dollarValue) * product.quantity;
-    total += prixTotal;
-
+  const products = data.map((product, index) => {
+    const prixTotal = product.price * dollarValue * product.quantity;
     return (
       <tr key={product._id} className="h-10 odd:bg-white/90 even:bg-primary/10">
         <td className="text-center">{index + 1}</td>
         <td className="w-1/2">{product.name}</td>
         <td className="text-center">{product.quantity}</td>
         <td className="text-center">
-          {prixTotal.toLocaleString("fr-MG", {
-            maximumFractionDigits: 0,
-          })}
+          {prixTotal.toLocaleString("fr-MG", { maximumFractionDigits: 0 })}
         </td>
       </tr>
     );
   });
+
+  const total = data.reduce((acc, product) => {
+    return acc + (product.price * dollarValue * product.quantity);
+  }, 0);
+
   return (
     <>
       <div className="flex-1 mb-20">
@@ -36,7 +35,7 @@ const Table = ({ products }) => {
             </tr>
             </thead>
             <tbody className="h-fit">
-            {items}
+            {products}
             </tbody>
           </table>
         </div>
@@ -45,6 +44,7 @@ const Table = ({ products }) => {
         Total : {total.toLocaleString("fr-MG", { maximumFractionDigits: 0 })} ar
       </div>
     </>
-  )
+  );
 }
-export default Table
+
+export default Table;

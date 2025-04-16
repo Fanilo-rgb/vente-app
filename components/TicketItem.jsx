@@ -8,11 +8,11 @@ const TicketItem = ({ id, name, date }) => {
   const [isHover, setIsHover] = useState(false)
 
   return (
-    <div className="relative group">
+    <div className="relative group w-full sm:w-5/12 md:w-56">
       <div
         onMouseEnter={()=>setIsHover(true)}
         onMouseLeave={()=>setIsHover(false)}
-        className="w-52 h-fit p-5 bg-white rounded-md shadow-sm flex flex-col justify-center items-center gap-5 hover:shadow-lg hover:scale-105 transition-all"
+        className="w-full h-fit p-5 bg-white rounded-md shadow-sm flex flex-col justify-center items-center gap-5 hover:shadow-lg hover:scale-105 transition-all"
       >
         <div className="w-full flex items-center justify-between">
           <Link href={`/dashboard/tickets/${id}`}>
@@ -36,7 +36,7 @@ const TicketItem = ({ id, name, date }) => {
         className={` 
           absolute w-fit p-5 bg-white rounded-md shadow-sm flex flex-col justify-center top-0 
           transition-all duration-300 
-          ${isHover ? "opacity-100 left-56 z-50" : "left-48 opacity-0"}
+          ${isHover ? "opacity-100 left-48 sm:left-60 z-50" : "left-48 opacity-0"}
         `}>
         <QRCodeSVG
           value={`http://localhost:3000/dashboard/tickets/${id}`}

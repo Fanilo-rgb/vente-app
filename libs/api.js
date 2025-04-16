@@ -42,3 +42,34 @@ export const getTickets = async () => {
     console.error("Error loading tickets", e);
   }
 }
+
+export const getTodaySales = async () => {
+  try {
+    const { products } = await getProducts();
+    const { tickets } = await getTickets();
+
+    const list = products.map(p => ({ ...p, quantity: 0 }));
+    const today = new Date();
+
+    const todayTickets = tickets.filter(ticket => {
+      const createdAt = new Date(ticket.createdAt);
+      return (
+        createdAt.getDate() === today.getDate() &&
+        createdAt.getMonth() === today.getMonth() &&
+        createdAt.getFullYear() === today.getFullYear()
+      );
+    });
+
+    todayTickets.forEach(ticket => {
+      ticket.items.forEach(productSold => {
+        const productIndex = list.findIndex(p => p.name === productSold.name);
+        if (productIndex !== -1) {
+          list[productIndex].quantity += productSold.quantity;
+        }
+      });
+    });
+    return list;
+  } catch (e) {
+    console.error("Error loading todaysSales", e);
+  }
+}

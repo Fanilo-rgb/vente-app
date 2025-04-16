@@ -41,7 +41,6 @@ const Tickets = async () => {
     }
   });
 
-  // Fonction pour afficher une section de tickets
   const renderGroup = (title, list) => {
     if (list.length === 0) return null;
 
@@ -50,7 +49,7 @@ const Tickets = async () => {
     return (
       <div className="mb-10 w-full">
         <h2 className="text-xl font-semibold mb-4">{title}</h2>
-        <div className="flex flex-wrap gap-5">
+        <div className="flex flex-wrap gap-5 justify-center md:justify-start">
           {list.map(ticket => {
             const surname = ticket.name.split(" ");
             return (
