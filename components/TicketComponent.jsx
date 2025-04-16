@@ -11,6 +11,8 @@ const TicketComponent = ({ ticketData }) => {
   const componentRef = useRef();
   const router = useRouter();
 
+  console.log(ticketData)
+
   const generatePDF = async () => {
     const input = componentRef.current;
 
@@ -47,11 +49,7 @@ const TicketComponent = ({ ticketData }) => {
     <div className="flex flex-col items-center">
       <button
         onClick={generatePDF}
-        className="mb-4 px-4 py-2 rounded-md text-sm transition"
-        style={{
-          backgroundColor: "#2563eb", // bg-blue-600
-          color: "#ffffff", // text-white
-        }}
+        className="btn mb-4 px-4 py-2 rounded-md text-sm transition"
       >
         Imprimer
       </button>

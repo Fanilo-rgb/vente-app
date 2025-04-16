@@ -53,7 +53,7 @@ const SearchDistForm = ({ distributors }) => {
         onBlur={() => {
           setTimeout(() => {
             setShowList(false)
-          }, 100)
+          }, 200)
         }}
         onChange={handleSearch}
         onClick={() => {setShowList(true)}}

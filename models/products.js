@@ -3,6 +3,7 @@ import mongoose, { Schema } from "mongoose";
 const productSchema = new Schema({
   name: String,
   price: Number,
+  quantity: Number,
 }, {
   timestamps: true,
 })

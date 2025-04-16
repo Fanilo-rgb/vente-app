@@ -33,10 +33,10 @@ const TicketItem = ({ id, name, date }) => {
         </div>
       </div>
       <div
-        className={
-          `absolute w-fit p-5 bg-white rounded-md shadow-sm flex flex-col justify-center top-0 transition-all
-          left-48 opacity-0 
-          ${isHover && "opacity-100 left-56"}
+        className={` 
+          absolute w-fit p-5 bg-white rounded-md shadow-sm flex flex-col justify-center top-0 
+          transition-all duration-300 
+          ${isHover ? "opacity-100 left-56 z-50" : "left-48 opacity-0"}
         `}>
         <QRCodeSVG
           value={`http://localhost:3000/dashboard/tickets/${id}`}

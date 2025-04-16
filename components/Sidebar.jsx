@@ -145,8 +145,7 @@ export const SidebarItem = ({ icon, text, active }) => {
     `}
     >
       {icon}
-      <span
-        className={`
+      <span className={`
           overflow-hidden transition-all duration-400 text-nowrap
           text-sm ${
           expanded 

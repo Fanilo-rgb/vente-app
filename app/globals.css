@@ -65,7 +65,7 @@
 }
 
 @utility btn {
-  @apply font-semibold text-sm px-4 py-2 rounded-xl grid place-items-center bg-white/60 shadow-lg shadow-primary border-t-2 border-primary hover:shadow-md hover:bg-primary/10 transition-all;
+  @apply font-semibold text-sm px-4 py-2 rounded-xl grid place-items-center bg-white/80 shadow-lg shadow-primary border-t-2 border-primary hover:shadow-md hover:bg-primary/50 transition-all;
 }
 
 @keyframes reveal {

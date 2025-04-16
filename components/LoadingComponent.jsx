@@ -4,7 +4,7 @@ const LoadingComponent = () => {
   const letters = 'Loading'.split('')
 
   return (
-    <div className="h-full grid place-items-center">
+    <div className="h-full w-full grid place-items-center">
       <h1 className="flex gap-5 items-center justify-center">
         {letters.map((letter, index) => (
           <span

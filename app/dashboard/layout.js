@@ -11,7 +11,7 @@ const navLinks = [
   { name: "Ventes", href: "/dashboard/sales", icon: <ClipboardList size={20}/> },
   { name: "Factures", href: "/dashboard/tickets", icon: <TicketCheck size={20}/> },
   { name: "Inventaire", href: "/dashboard/inventory", icon: <Inbox size={20}/> },
-  { name: "Base de donnée", href: "/dashboard/database", icon: <Box size={20}/> },
+  { name: "Base de donnée", href: "/dashboard/edit", icon: <Box size={20}/> },
 ]
 
 const Layout = ({children}) => {

@@ -17,7 +17,7 @@ const SearchProductsForm = ({ products }) => {
     const search = prodName.toLocaleLowerCase();
     return name.includes(search);
   })
-    .slice(0, 5)
+    .slice(0, 9)
     .map(product => {
       const handleClick = () => {
         setProdName(product.name);
