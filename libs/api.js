@@ -43,6 +43,65 @@ export const getTickets = async () => {
   }
 }
 
+export const getSortTickets = async () => {
+  const isSameDay = (date1, date2) => {
+    return date1.toDateString() === date2.toDateString();
+  };
+
+  const isYesterday = (date) => {
+    const yesterday = new Date();
+    yesterday.setDate(yesterday.getDate() - 1);
+    return isSameDay(date, yesterday);
+  };
+
+  const isLast7Days = (date) => {
+    const now = new Date();
+    const sevenDaysAgo = new Date();
+    sevenDaysAgo.setDate(now.getDate() - 7);
+    return date > sevenDaysAgo && !isSameDay(date, now) && !isYesterday(date);
+  };
+
+  const isLast3Months = (date) => {
+    const now = new Date();
+    const threeMonthsAgo = new Date();
+    threeMonthsAgo.setMonth(now.getMonth() - 3);
+    return date > threeMonthsAgo && !isSameDay(date, now) && !isYesterday(date) && !isLast7Days(date);
+  };
+
+  try {
+    const { tickets } = await getTickets();
+    const today = [];
+    const yesterday = [];
+    const last7days = [];
+    const last3months = [];
+
+    const data = [
+      { title: "Aujourd'hui", list: today },
+      { title: "Hier", list: yesterday },
+      { title: "7 derniers jours", list: last7days },
+      { title: "3 derniers mois", list: last3months },
+    ];
+
+    tickets.forEach(ticket => {
+      const date = new Date(ticket.createdAt);
+
+      if (isSameDay(date, new Date())) {
+        today.push(ticket);
+      } else if (isYesterday(date)) {
+        yesterday.push(ticket);
+      } else if (isLast7Days(date)) {
+        last7days.push(ticket);
+      } else if (isLast3Months(date)) {
+        last3months.push(ticket);
+      }
+    });
+
+    return data;
+  } catch (e) {
+    console.error("Error loading tickets", e);
+  }
+}
+
 export const getTodaySales = async () => {
   try {
     const { products } = await getProducts();
