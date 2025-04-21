@@ -18,10 +18,10 @@ const getProductById = async (id) => {
 const Product = async({params}) => {
   const id = (await params).id
   const { product } = await getProductById(id)
-  const { _id, name, price, quantity } = product
+  const { _id, name, price, bv, order, barCode } = product
   return (
     <div className={"flex justify-center"}>
-      <EditProductForm id={_id} name={name} price={price} quantity={quantity} />
+      <EditProductForm id={_id} name={name} price={price} bv={bv} order={order} barCode={barCode} />
     </div>
   )
 }

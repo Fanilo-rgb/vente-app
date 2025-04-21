@@ -2,12 +2,15 @@
 import React, {useState} from 'react'
 import { useRouter } from 'next/navigation'
 
-const EditProductForm = ({ id, name, price, quantity }) => {
+const EditProductForm = ({ id, name, price, bv, order, barCode }) => {
   const router = useRouter()
 
   const [newName, setNewName] = useState(name)
   const [newPrice, setNewPrice] = useState(price)
-  const [newQuantity, setNewQuantity] = useState(quantity)
+  const [newQuantity, setNewQuantity] = useState(0)
+  const [newOrder, setNewOrder] = useState(order || "")
+  const [newBarCode, setNewBarCode] = useState(barCode || "-")
+  const [newBv, setNewBv] = useState(bv || "")
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -18,7 +21,7 @@ const EditProductForm = ({ id, name, price, quantity }) => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({newName, newPrice, newQuantity})
+        body: JSON.stringify({newName, newBv, newPrice, newQuantity, newOrder, newBarCode})
       })
 
       if (!res.ok) {
@@ -43,18 +46,34 @@ const EditProductForm = ({ id, name, price, quantity }) => {
       />
       <div className={"flex gap-2"}>
         <input
+          onChange={e => setNewBv(e.target.value)}
+          value={newBv}
+          className={"text-base flex-1 pl-3 p-2 bg-white rounded-2xl"}
+          type={"number"}
+          placeholder={"Bv"}
+        />
+        <input
           onChange={e => setNewPrice(e.target.value)}
           value={newPrice}
           className={"text-base flex-1 pl-3 p-2 bg-white rounded-2xl"}
           type={"number"}
           placeholder={"Prix"}
         />
+      </div>
+      <div className={"flex gap-2"}>
         <input
-          onChange={e => setNewQuantity(e.target.value)}
-          value={newQuantity}
-          className={"text-base flex-1 pl-3 p-2 bg-white rounded-2xl"}
+          onChange={e => setNewOrder(e.target.value)}
+          value={newOrder}
+          className={"text-base w-20 pl-3 p-2 bg-white rounded-2xl"}
           type={"number"}
-          placeholder={"Quantité"}
+          placeholder={"Ordre"}
+        />
+        <input
+          onChange={e => setNewBarCode(e.target.value)}
+          value={newBarCode}
+          className={"text-base flex-1 pl-3 p-2 bg-white rounded-2xl"}
+          type={"text"}
+          placeholder={"Code barre"}
         />
       </div>
       <button type={"submit"} className="btn btn-primary">

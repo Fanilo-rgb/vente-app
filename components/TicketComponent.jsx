@@ -11,8 +11,6 @@ const TicketComponent = ({ ticketData }) => {
   const componentRef = useRef();
   const router = useRouter();
 
-  console.log(ticketData)
-
   const generatePDF = async () => {
     const input = componentRef.current;
 
@@ -49,7 +47,7 @@ const TicketComponent = ({ ticketData }) => {
     <div className="flex flex-col items-center">
       <button
         onClick={generatePDF}
-        className="btn mb-4 px-4 py-2 rounded-md text-sm transition"
+        className="absolute right-5 btn mb-4 px-4 py-2 rounded-md text-sm transition"
       >
         Imprimer
       </button>
@@ -62,8 +60,7 @@ const TicketComponent = ({ ticketData }) => {
           color: "#1f2937", // text-gray-800
         }}
       >
-        <h1>MAGLIFE</h1>
-        <div className="text-xs">
+        <div className="text-sm">
           <p>
             {new Date(createdAt).toLocaleString("fr-FR", {
               day: "2-digit",
@@ -93,8 +90,8 @@ const TicketComponent = ({ ticketData }) => {
             const ariary = item.price * dollarValue;
             return (
               <li key={item._id}>
-                <p className="font-medium">{item.name}</p>
-                <div className="flex justify-between text-xs pl-3">
+                <p className="font-medium text-lg">{item.name}</p>
+                <div className="flex justify-between text-sm pl-3">
                   <span>
                     {ariary.toLocaleString("fr-MG")} x {item.quantity}
                   </span>
@@ -123,7 +120,7 @@ const TicketComponent = ({ ticketData }) => {
         </div>
 
         <p
-          className="text-center text-xs mt-2 italic"
+          className="text-center text-sm mt-2 italic"
           style={{ color: "#15803d" }} // text-green-700
         >
           Payé et livré

@@ -3,27 +3,25 @@ import { useData } from "@/context/DataProvider";
 
 const ReceiptData = () => {
   const { data } = useData();
-  const dollarValue = 3600;
 
   const totalAriary = data?.products.reduce((acc, product) => {
-    return acc + (product.price * dollarValue * product.quantity);
-  }, 0);
-
-  const totalDollar = data?.products.reduce((acc, product) => {
     return acc + (product.price * product.quantity);
   }, 0);
 
+  const totalDollar = data?.products.reduce((acc, product) => {
+    return acc + (product.bv * product.quantity);
+  }, 0);
+
   const prodList = data?.products.map((product, index) => {
-    const ariary = product.price * dollarValue;
     return (
       <li key={index}>
         <p className="mb-2">{product.name}</p>
         <p className="text-sm flex justify-between pl-5">
           <span>
-            {ariary.toLocaleString("fr-MG")} x {product.quantity}
+            {product.price.toLocaleString("fr-MG")} x {product.quantity}
           </span>
           <span>
-            {(ariary * product.quantity).toLocaleString("fr-MG", {
+            {(product.price * product.quantity).toLocaleString("fr-MG", {
               maximumFractionDigits: 0,
             })}{" "}
             Ar

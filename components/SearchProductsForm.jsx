@@ -11,6 +11,7 @@ const SearchProductsForm = ({ products }) => {
   const [prodName, setProdName] = useState("");
   const [quantity, setQuantity] = useState(1);
   const [prodPrice, setProdPrice] = useState(0);
+  const [prodBv, setProdBv] = useState(0);
 
   const prodList = products.filter((product) => {
     const name = product.name.toLocaleLowerCase();
@@ -22,14 +23,18 @@ const SearchProductsForm = ({ products }) => {
       const handleClick = () => {
         setProdName(product.name);
         setProdPrice(product.price);
+        setProdBv(product.bv);
       };
       return (
         <li
           key={product._id}
           onClick={handleClick}
-          className="h-8 p-5 cursor-pointer flex items-center hover:bg-primary/20 transition-all">
+          className={`
+            h-8 p-5 cursor-pointer flex items-center hover:bg-primary/20 transition-all
+          `}>
           <span className="flex-1">{product.name}</span>
           <span>{product.price}</span>
+          <span className="w-20 flex items-center justify-center">{product.quantity}</span>
         </li>
       );
     });
@@ -58,6 +63,7 @@ const SearchProductsForm = ({ products }) => {
         {
           name: prodName,
           price: prodPrice,
+          bv: prodBv,
           quantity: quantity,
         }
       ]
@@ -66,6 +72,7 @@ const SearchProductsForm = ({ products }) => {
     setProdName("");
     setQuantity(1);
     setProdPrice(0);
+    setProdBv(0)
   };
 
   return (

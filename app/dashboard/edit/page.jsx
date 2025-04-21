@@ -12,11 +12,15 @@ const Produit = async () => {
     return (
       <li key={product._id} className={"flex gap-5 items-center bg-white rounded-2xl p-2 min-w-lg shadow hover:shadow-lg transition-all"}>
         <span className={"flex items-center gap-10"}>
-          <h4 className={"w-96"}>{product.name}</h4>
-          <h4 className={"w-14"}>{product.price} $</h4>
-          <p className={" flex items-center justify-center shadow-sm shadow-primary rounded-full w-14"}>
-            {product.quantity > 0 ? (product.quantity) : ("-")}
-          </p>
+          <div className={"flex gap-2"}>
+            <p className={"rounded-lg w-8 flex items-center justify-center"}>{product.order}</p>
+            <div className={"w-96 flex flex-col gap-2"}>
+              <h4>{product.name}</h4>
+              <p className={"text-sm text-gray-600"}>{product.barCode}</p>
+            </div>
+          </div>
+          <h4 className={"w-28"}>{product.price} Ar</h4>
+          <h4 className={"w-14"}>{product.bv} $</h4>
         </span>
         <span className={"flex gap-2 items-center"}>
           <RemoveProductBtn id={product._id}/>
