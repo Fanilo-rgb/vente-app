@@ -33,7 +33,8 @@ const AddProductForm = () => {
         router.refresh();
         setName("")
         setPrice("")
-        setQuantity("")
+        setBv("")
+        setOrder("")
       } else {
         throw new Error("Error creating product");
       }
@@ -54,7 +55,7 @@ const AddProductForm = () => {
       <input
         onChange={e => setName(e.target.value)}
         value={name}
-        className={"text-base flex-1 pl-3 p-2 bg-white rounded-2xl"}
+        className={"input"}
         type={"text"}
         placeholder={"Nom produit"}
       />
@@ -62,14 +63,14 @@ const AddProductForm = () => {
         <input
           onChange={handleBv}
           value={bv}
-          className={"text-base flex-1 pl-3 p-2 bg-white rounded-2xl"}
+          className={"input"}
           type={"number"}
           placeholder={"Bv"}
         />
         <input
           onChange={e => setPrice(e.target.value)}
           value={price}
-          className={"text-base flex-1 pl-3 p-2 bg-white rounded-2xl"}
+          className={"input"}
           type={"number"}
           placeholder={"Prix"}
         />
@@ -85,7 +86,7 @@ const AddProductForm = () => {
         <input
           onChange={e => setBarCode(e.target.value)}
           value={barCode}
-          className={"text-base flex-1 pl-3 p-2 bg-white rounded-2xl"}
+          className={"input"}
           type={"text"}
           placeholder={"Code barre"}
         />

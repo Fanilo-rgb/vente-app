@@ -11,6 +11,9 @@ const Layout = ({ children }) => {
           <Link href={"http://localhost:3000/dashboard/edit"}>
             <NavItem text={"Produit"}/>
           </Link>
+          <Link href={"http://localhost:3000/dashboard/edit/distributor"}>
+            <NavItem text={"Distributeur"}/>
+          </Link>
         </Nav>
         <div className={"relative ml-5 h-full"}>
           {children}
