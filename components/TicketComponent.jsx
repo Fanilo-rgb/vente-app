@@ -34,12 +34,12 @@ const TicketComponent = ({ ticketData }) => {
   };
 
   const totalAriary = items.reduce(
-    (sum, item) => sum + item.price * dollarValue * item.quantity,
+    (sum, item) => sum + item.price * item.quantity,
     0
   );
 
   const totalDollar = items.reduce(
-    (sum, item) => sum + item.price * item.quantity,
+    (sum, item) => sum + item.bv * item.quantity,
     0
   );
 
@@ -87,16 +87,15 @@ const TicketComponent = ({ ticketData }) => {
 
         <ul className="flex flex-col gap-2 text-sm">
           {items.map((item) => {
-            const ariary = item.price * dollarValue;
             return (
               <li key={item._id}>
                 <p className="font-medium text-lg">{item.name}</p>
                 <div className="flex justify-between text-sm pl-3">
                   <span>
-                    {ariary.toLocaleString("fr-MG")} x {item.quantity}
+                    {item.price.toLocaleString("fr-MG")} x {item.quantity}
                   </span>
                   <span>
-                    {(ariary * item.quantity).toLocaleString("fr-MG", {
+                    {(item.price * item.quantity).toLocaleString("fr-MG", {
                       maximumFractionDigits: 0,
                     })}{" "}
                     Ar

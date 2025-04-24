@@ -1,10 +1,9 @@
 "use client"
 
 const Table = ({ data }) => {
-  const dollarValue = 3600;
 
   const products = data.map((product, index) => {
-    const prixTotal = product.price * dollarValue * product.quantity;
+    const prixTotal = product.price * product.quantity;
     return (
       <tr key={product._id} className="h-10 odd:bg-white/90 even:bg-primary/10">
         <td className="text-center">{index + 1}</td>
@@ -18,7 +17,7 @@ const Table = ({ data }) => {
   });
 
   const total = data.reduce((acc, product) => {
-    return acc + (product.price * dollarValue * product.quantity);
+    return acc + (product.price * product.quantity);
   }, 0);
 
   return (

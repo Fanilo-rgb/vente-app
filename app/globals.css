@@ -49,14 +49,20 @@
     }
 
     & svg:nth-child(2) {
-       animation-delay: 200ms;
+      animation-delay: 200ms;
     }
     & svg:nth-child(3) {
-        animation-delay: 400ms;
+      animation-delay: 400ms;
     }
     & svg:nth-child(4) {
-         animation-delay: 600ms;
+      animation-delay: 600ms;
     }
+  }
+  .loadingComponent {
+    animation: loadingAnimation 1s ease infinite;
+  }
+  .item {
+    animation: addItem 1s cubic-bezier(0.19, 1, 0.22, 1) forwards;
   }
 }
 
@@ -75,5 +81,26 @@
     scale: 1;
     top: 0;
     right: -208px;
+  }
+}
+
+@keyframes loadingAnimation {
+  0% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes addItem {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
   }
 }
