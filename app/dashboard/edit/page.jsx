@@ -10,7 +10,7 @@ const Produit = async () => {
 
   const items = products.map((product) => {
     return (
-      <li key={product._id} className={"flex gap-5 items-center bg-white rounded-2xl p-2 min-w-lg shadow hover:shadow-lg transition-all"}>
+      <li key={product._id} className={"flex gap-5 items-center bg-white rounded-2xl p-2 shadow hover:shadow-lg transition-all"}>
         <span className={"flex items-center gap-10"}>
           <div className={"flex gap-2"}>
             <p className={"rounded-lg w-8 flex items-center justify-center"}>{product.order}</p>

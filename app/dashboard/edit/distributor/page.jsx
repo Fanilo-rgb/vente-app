@@ -2,8 +2,8 @@ import RemoveProductBtn from "@/components/RemoveProductBtn";
 import Link from "next/link";
 import {SquarePen} from "lucide-react";
 import React from "react";
-import AddPersonForm from "@/components/AddPersonForm";
 import {getDistributors} from "@/libs/api";
+import AddPersonForm from "@/components/AddPersonForm";
 
 const Distributor = async () => {
 
@@ -15,7 +15,7 @@ const Distributor = async () => {
         <span className={"flex items-center gap-10"}>
           <div className={"flex gap-2"}>
             <p className={"rounded-lg w-8 flex items-center justify-center"}>{index + 1}</p>
-            <div className={"w-xl flex flex-col gap-2"}>
+            <div className={"w-xl flex flex-col gap-2 w-96"}>
               <h4>{distributor.name} {distributor.surname}</h4>
               <p className={"text-sm text-gray-600"}>{distributor.number_card}</p>
             </div>
@@ -35,12 +35,15 @@ const Distributor = async () => {
 
   return (
     <div className={"absolute top-0 bottom-0 overflow-hidden flex gap-5"}>
-      <div className={"overflow-auto"}>
-        <ul className={"flex flex-col bg-black/10 rounded-3xl p-2 gap-2 min-w-xl"}>
+      <div className={"overflow-auto flex flex-col gap-2"}>
+        <div className={"flex flex-col bg-black/10 rounded-3xl p-2 gap-2"}>
+          <input className={"input"} placeholder={"Recherche"}/>
+        </div>
+        <ul className={"flex flex-col bg-black/10 rounded-3xl p-2 gap-2"}>
           {list}
         </ul>
       </div>
-      <AddPersonForm />
+      <AddPersonForm/>
     </div>
   )
 }

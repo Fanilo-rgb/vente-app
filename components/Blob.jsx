@@ -74,4 +74,4 @@ const Blob = () => {
     </div>
   )
 }
-export default Blob
+export default Blob;

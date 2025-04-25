@@ -8,11 +8,14 @@ const Layout = ({ children }) => {
     <Content title={"Edit"}>
       <div className={"h-full flex flex-col gap-5"}>
         <Nav>
-          <Link href={"http://localhost:3000/dashboard/edit"}>
+          <Link href={"/dashboard/edit"}>
             <NavItem text={"Produit"}/>
           </Link>
-          <Link href={"http://localhost:3000/dashboard/edit/distributor"}>
+          <Link href={"/dashboard/edit/distributor"}>
             <NavItem text={"Distributeur"}/>
+          </Link>
+          <Link href={"/dashboard/edit/distributor/adhesion"}>
+            <NavItem text={"Adhésion"}/>
           </Link>
         </Nav>
         <div className={"relative ml-5 h-full"}>
