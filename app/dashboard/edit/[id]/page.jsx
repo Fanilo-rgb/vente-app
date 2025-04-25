@@ -16,7 +16,7 @@ const getProductById = async (id) => {
 }
 
 const Product = async({params}) => {
-  const id = (await params).id
+  const { id } = await params
   const { product } = await getProductById(id)
   const { _id, name, price, bv, order, barCode } = product
   return (

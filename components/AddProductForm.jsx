@@ -51,7 +51,7 @@ const AddProductForm = () => {
   }
 
   return (
-    <form onSubmit={handleSubmit} className={"flex flex-col bg-black/10 rounded-3xl p-2 gap-2 max-w-lg"}>
+    <form onSubmit={handleSubmit} className={"flex flex-col bg-black/10 rounded-3xl p-2 gap-2 w-lg"}>
       <input
         onChange={e => setName(e.target.value)}
         value={name}

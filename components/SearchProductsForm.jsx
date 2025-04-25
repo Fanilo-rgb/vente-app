@@ -53,8 +53,11 @@ const SearchProductsForm = ({ products }) => {
     }
   };
 
+  //const addAudio = new Audio("/sounds/newspaper-foley.mp3");
   const handleSubmit = () => {
     if (!prodName || !prodPrice || !quantity) return;
+
+    //addAudio.play();
 
     setData(prev => ({
       ...prev,

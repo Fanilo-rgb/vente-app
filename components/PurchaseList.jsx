@@ -50,11 +50,11 @@ export const Item = ({ product }) => {
       <button
         onClick={() => handleDelete(product.name)}
         className={`
-            flex items-center justify-center rounded-full bg-red-200 transition-all duration-300 text-red-600 overflow-hidden
-            ${isHover
+          flex items-center justify-center rounded-full bg-red-200 transition-all duration-300 text-red-600 overflow-hidden
+          ${isHover
           ? "min-w-12 h-12 w-12"
           : "min-w-0 h-0 w-0"}
-          `}
+        `}
       >
         <Trash2 size={20} />
       </button>

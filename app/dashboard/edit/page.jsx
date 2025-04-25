@@ -36,13 +36,13 @@ const Produit = async () => {
 
   return (
     <div className={"absolute top-0 bottom-0 overflow-hidden flex gap-5"}>
-      <div>
-        <AddProductForm/>
-      </div>
       <div className={"overflow-auto"}>
         <ul className={"flex flex-col bg-black/10 rounded-3xl p-2 gap-2 min-w-xl"}>
           {items}
         </ul>
+      </div>
+      <div>
+        <AddProductForm/>
       </div>
     </div>
   )

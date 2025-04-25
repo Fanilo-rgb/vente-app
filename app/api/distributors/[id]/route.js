@@ -4,9 +4,9 @@ import Distributor from "@/models/distributors";
 
 export async function PUT(req, { params }) {
   const { id } = params;
-  const { newName: name, newNumber_card: number_card} = await req.json();
+  const { newName: name, newSurname: surname, newPhone: phone, newAddress: address, newPostal_code: postal_code } = await req.json();
   await connectMongoDB();
-  await Distributor.findByIdAndUpdate(id, { name, number_card });
+  await Distributor.findByIdAndUpdate(id, { name, surname, phone, address, postal_code });
   return NextResponse.json({ message: "Successfully updated a Distributor" }, { status: 200 });
 }
 
