@@ -1,7 +1,7 @@
 import React from 'react'
 
 const LoadingComponent = () => {
-  const letters = 'Loading'.split('')
+  const letters = 'Endraso kely'.split('')
 
   return (
     <div className="h-full w-full grid place-items-center">

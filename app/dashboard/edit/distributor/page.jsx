@@ -4,6 +4,7 @@ import {SquarePen} from "lucide-react";
 import React from "react";
 import {getDistributors} from "@/libs/api";
 import AddPersonForm from "@/components/AddPersonForm";
+import RemoveDistributorBtn from "@/components/RemoveDistributorBtn";
 
 const Distributor = async () => {
 
@@ -22,7 +23,7 @@ const Distributor = async () => {
           </div>
         </span>
         <span className={"flex gap-2 items-center"}>
-          <RemoveProductBtn/>
+          <RemoveDistributorBtn id={distributor._id} />
           <Link href={`http://localhost:3000/dashboard/edit/distributor/${distributor._id}`}>
             <button className={"p-2 rounded-full hover:bg-black/10 transition-all"}>
               <SquarePen size={18}/>
