@@ -10,7 +10,7 @@ const PurchaseInner = ({ distributors, products }) => {
   const { data } = useData();
   const router = useRouter();
 
-  const handlePayement = async () => {
+  const handlePayment = async () => {
     const { holder, products: items } = data;
 
     if (!holder.name || !holder.number_card) {
@@ -57,7 +57,7 @@ const PurchaseInner = ({ distributors, products }) => {
         <PurchaseList />
 
         <button
-          onClick={handlePayement}
+          onClick={handlePayment}
           className="btn fixed bottom-10 left-30"
         >
           Payement

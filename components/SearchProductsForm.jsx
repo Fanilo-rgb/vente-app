@@ -1,5 +1,5 @@
 "use client"
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import { Plus } from "lucide-react";
 import { useData } from "@/context/DataProvider";
 import InputSearchResults from "@/components/InputSearchResults";
@@ -12,36 +12,65 @@ const SearchProductsForm = ({ products }) => {
   const [quantity, setQuantity] = useState(1);
   const [prodPrice, setProdPrice] = useState(0);
   const [prodBv, setProdBv] = useState(0);
+  const [selectedIndex, setSelectedIndex] = useState(-1);
 
-  const prodList = products.filter((product) => {
+  const inputRef = useRef(null);
+
+  const filteredProducts = products.filter((product) => {
     const name = product.name.toLocaleLowerCase();
     const search = prodName.toLocaleLowerCase();
     return name.includes(search);
-  })
-    .slice(0, 9)
-    .map(product => {
-      const handleClick = () => {
-        setProdName(product.name);
-        setProdPrice(product.price);
-        setProdBv(product.bv);
-      };
-      return (
-        <li
-          key={product._id}
-          onClick={handleClick}
-          className={`
-            h-8 p-5 cursor-pointer flex items-center hover:bg-primary/20 transition-all
-          `}>
-          <span className="flex-1">{product.name}</span>
-          <span>{product.price}</span>
-          <span className="w-20 flex items-center justify-center">{product.quantity}</span>
-        </li>
-      );
-    });
+  }).slice(0, 9);
+
+  const handleSelectProduct = (product) => {
+    setProdName(product.name);
+    setProdPrice(product.price);
+    setProdBv(product.bv);
+    setShowList(false);
+    setSelectedIndex(-1);
+  };
+
+  const prodList = filteredProducts.map((product, i) => (
+    <li
+      key={product._id}
+      onClick={() => handleSelectProduct(product)}
+      className={`
+        h-8 p-5 cursor-pointer flex items-center transition-all
+        ${selectedIndex === i ? "bg-primary/40 text-black" : "hover:bg-primary/20"}
+      `}
+    >
+      <span className="flex-1">{product.name}</span>
+      <span>{product.price}</span>
+      <span className="w-20 flex items-center justify-center">{product.quantity}</span>
+    </li>
+  ));
 
   const handleChange = (e) => {
     setProdName(e.target.value);
     setShowList(true);
+    setSelectedIndex(-1);
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === "ArrowDown") {
+      e.preventDefault();
+      setSelectedIndex((prev) =>
+        prev < filteredProducts.length - 1 ? prev + 1 : 0
+      );
+    } else if (e.key === "ArrowUp") {
+      e.preventDefault();
+      setSelectedIndex((prev) =>
+        prev > 0 ? prev - 1 : filteredProducts.length - 1
+      );
+    } else if (e.key === "Enter") {
+      e.preventDefault();
+      if (filteredProducts.length === 1) {
+        handleSelectProduct(filteredProducts[0]);
+      } else if (selectedIndex >= 0 && filteredProducts[selectedIndex]) {
+        handleSelectProduct(filteredProducts[selectedIndex]);
+      }
+      inputRef.current.blur();
+    }
   };
 
   const handleQuantityChange = (e) => {
@@ -53,11 +82,8 @@ const SearchProductsForm = ({ products }) => {
     }
   };
 
-  //const addAudio = new Audio("/sounds/newspaper-foley.mp3");
   const handleSubmit = () => {
     if (!prodName || !prodPrice || !quantity) return;
-
-    //addAudio.play();
 
     setData(prev => ({
       ...prev,
@@ -75,7 +101,7 @@ const SearchProductsForm = ({ products }) => {
     setProdName("");
     setQuantity(1);
     setProdPrice(0);
-    setProdBv(0)
+    setProdBv(0);
   };
 
   return (
@@ -83,10 +109,15 @@ const SearchProductsForm = ({ products }) => {
       <div className="relative flex flex-1 p-2 rounded-3xl bg-black/10 transition-all">
         <div className="flex items-center gap-2 flex-1 transition-all">
           <input
+            ref={inputRef}
             onChange={handleChange}
             onClick={() => setShowList(true)}
             value={prodName}
-            onBlur={() => setTimeout(() => setShowList(false), 200)}
+            onKeyDown={handleKeyDown}
+            onBlur={() => setTimeout(() => {
+              setShowList(false);
+              setSelectedIndex(-1);
+            }, 200)}
             className="text-base flex-1 pl-3 p-2 bg-white rounded-2xl"
             type="text"
             placeholder="Nom du produit"
@@ -106,7 +137,8 @@ const SearchProductsForm = ({ products }) => {
       </div>
       <button
         onClick={handleSubmit}
-        className="btn">
+        className="btn"
+      >
         <Plus size={20} />
       </button>
     </div>

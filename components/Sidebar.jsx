@@ -34,7 +34,7 @@ const Sidebar = ({ children }) => {
                 absolute -right-10 -translate-x-1/2
                 bg-primary/10 ring-2 ring-primary rounded-lg p-0.5 backdrop-blur-sm transition-transform
                 ${expanded ? "rotate-0" : "rotate-180"}
-                `}
+              `}
             >
               <ChevronLeft color="gray" size={20} />
             </button>
@@ -132,26 +132,24 @@ export const SidebarItem = ({ icon, text, active }) => {
   const expanded = useContext(ExpandedContext);
 
   return (
-    <li
-      className={`
-        flex items-center
-        font-medium rounded-full cursor-pointer
-        transition-colors px-4.5 py-4 group
-        ${
-        active
-          ? "bg-gradient-to-b from-teal-600 to-teal-400 text-white"
-          : "hover:bg-primary/30 text-gray-600"
+    <li className={`
+      flex items-center
+      font-medium rounded-full cursor-pointer
+      transition-colors px-4.5 py-4 group
+      ${ active
+        ? "bg-gradient-to-b from-teal-600 to-teal-400 text-white"
+        : "hover:bg-primary/30 text-gray-600"
       }
     `}
     >
       {icon}
       <span className={`
-          overflow-hidden transition-all duration-400 text-nowrap
-          text-sm ${
-          expanded 
-            ? "ml-3 w-52" 
-            : "absolute bg-primary text-gray-600 left-15 py-2 px-5 rounded-lg opacity-0 group-hover:opacity-100 group-hover:left-22 group-"}
-        `}
+        overflow-hidden transition-all duration-400 text-nowrap
+        text-sm ${
+        expanded 
+          ? "ml-3 w-52" 
+          : "absolute bg-primary text-gray-600 -left-20 -z-50 py-2 px-5 rounded-lg opacity-0 group-hover:opacity-100 group-hover:left-22 group-"}
+      `}
       >
         {text}
       </span>

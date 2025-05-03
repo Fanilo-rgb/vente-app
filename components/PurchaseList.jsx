@@ -5,7 +5,6 @@ import { useData } from "@/context/DataProvider";
 
 const PurchaseList = () => {
   const { data } = useData();
-  const [isHover, setIsHover] = useState(false);
 
   const prodList = data?.products.map((product, index) => {
     return (

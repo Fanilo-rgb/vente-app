@@ -20,7 +20,7 @@ const SearchDistForm = ({ distributors }) => {
   })
     .slice(0, 5)
     .map((distributor) => {
-      const handleClick = (e) => {
+      const handleClick = () => {
         setDistName(distributor.name);
         setData(prev => ({
           ...prev,
@@ -35,8 +35,10 @@ const SearchDistForm = ({ distributors }) => {
         <li
           onClick={handleClick}
           key={distributor._id}
-          className="h-8 p-5 cursor-pointer flex items-center hover:bg-primary/20 transition-all">
-          <span className="flex-1 align-middle">{distributor.name}</span>
+          className={`
+            h-8 p-5 cursor-pointer hover:bg-primary/20 flex items-center  transition-all
+          `}>
+          <span className="flex-1 align-middle">{distributor.name} {distributor.surname}</span>
           <span className="text-center rounded-sm">{distributor.number_card}</span>
         </li>
       )
